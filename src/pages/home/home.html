@@ -1,0 +1,22 @@
+<ion-footer *ngIf="show_header">
+  <ion-toolbar danger>
+  <ion-title text-center> Favorites </ion-title> 
+  </ion-toolbar>
+</ion-footer>
+<ion-content>
+  <timer (stop)="stop()" style="z-index: 2; position: fixed; width:100%;" playState="{{state}}"></timer>
+  <ion-slides pager (ionSlideDidChange)="slideChanged(id)">
+    <ion-slide *ngFor="let slide of all_slides" [ngStyle]="{'background-color': slide.color}">
+      <h2 [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+      <ion-icon name="heart" *ngIf="is_favorite(slide.id) && slide.id!='end'" (click)="undo_favorite(slide.id)"> </ion-icon>
+      <ion-icon name="ios-heart-outline"  *ngIf="!is_favorite(slide.id) && slide.id!='end'" (click)="favorite(slide.id)"> </ion-icon>
+    </ion-slide>
+  </ion-slides>
+  <ion-fab center bottom *ngIf="state!='loading'">
+    <button ion-fab color="danger" (click)="clicked()">
+      <ion-icon *ngIf="state=='stopped'" name="play"></ion-icon>
+      <ion-icon *ngIf="state=='playing'" name="square"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-list *ngIf="timer">
+    <ion-label *ngIf="timeInSeconds && timeInSeconds > 0 && playState == 'playing'" text-center> MUSIC WILL STOP AFTER </ion-label>
+    <ion-label *ngIf="timeInSeconds && timeInSeconds > 0 && playState == 'stopped'" text-center> MUSIC WILL PLAY FOR </ion-label>
+    <ion-label text-center *ngIf="timeInSeconds && timeInSeconds > 0" large full clear class="timer-button">{{timer.displayTime}}</ion-label>
+    <ion-item clear style="position: fixed">
+        <ion-label> DURATION </ion-label>
+        <ion-select text-center [(ngModel)]="timeInSeconds" (ionChange)="reset_timer()">
+            <ion-option value="300"> 5 mins </ion-option>
+            <ion-option value="600"> 10 mins </ion-option>
+            <ion-option value="900"> 15 mins </ion-option>
+            <ion-option value="1800"> 30 mins </ion-option>
+            <ion-option value="0"> Endless </ion-option>
+        </ion-select>
+    </ion-item>
+</ion-list>
